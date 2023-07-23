@@ -1,4 +1,4 @@
-const server = 'http://localhost:8080';
+const server = 'http://localhost:3000';
 
 document.querySelector('form').addEventListener('submit', (e) => {
     console.log("xxxx");
