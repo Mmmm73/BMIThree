@@ -1,34 +1,56 @@
 const server = 'http://localhost:3000';
 
-document.querySelector('form').addEventListener('submit', (e) => {
+/*document.querySelector('form').addEventListener('submit', (e) => {
     console.log("xxxx");
     weightinput = document.getElementById('weight').value;
     heightinput = document.getElementById('height').value;
     console.log("weightinput", weightinput);
     console.log("heightinput", heightinput);
 
+    var bmiValue = calculateBMI(weightinput, heightinput);
+    addBmiRecord(bmiValue);
+
+    e.preventDefault();
+});*/
+
+function submitEntry(){
+    weightinput = document.getElementById('weight').value;
+    heightinput = document.getElementById('height').value;
+    console.log("weightinput", weightinput);
+    console.log("heightinput", heightinput);
+
+    var bmiValue = calculateBMI(weightinput, heightinput);
+    addBmiRecord(bmiValue);
+
+    e.preventDefault();
+}
+
+function calculateBMI(weightinput, heightinput){
     bmiValue = parseFloat(weightinput)/(parseFloat(heightinput) * parseFloat(heightinput));
     console.log("bmiValue", bmiValue);
     
     document.getElementById('bmi-result').innerHTML = bmiValue;
+    var message;
 
     if(bmiValue < 18.5){
-        document.getElementById('bmi-prediction').innerHTML = "You're in the underweight range!";
+        message = "You're in the underweight range!";
+        document.getElementById('bmi-prediction').innerHTML = message;
     }
     else if(bmiValue <= 24.9){
-        document.getElementById('bmi-prediction').innerHTML = "You're in the healthy weight range!";
+        message = "You're in the healthy weight range!";
+        document.getElementById('bmi-prediction').innerHTML = message;
     }
     else if(bmiValue <= 29.9){
-        document.getElementById('bmi-prediction').innerHTML = "You're in the overweight range!";
+        message = "You're in the overweight range!";
+        document.getElementById('bmi-prediction').innerHTML = message;
     }
     else{
-        document.getElementById('bmi-prediction').innerHTML = "You're in the obese range!";
+        message = "You're in the obese range!";
+        document.getElementById('bmi-prediction').innerHTML = message;
     }
 
-    addBmiRecord(bmiValue);
-
-    e.preventDefault();
-});
+    return bmiValue;
+}
 
 
 
@@ -84,3 +106,5 @@ function displayEntries(records) {
     console.log("average", average);
     document.getElementById('bmi-average').innerHTML = "Average: " + average;
 }
+
+module.exports = {calculateBMI};
